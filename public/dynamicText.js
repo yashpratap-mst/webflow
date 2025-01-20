@@ -1,5 +1,7 @@
 (function () {
   document.addEventListener("DOMContentLoaded", () => {
+   
+    
     document.addEventListener("click", (event) => {
       if (event.target.tagName === "BUTTON") {
         const buttonID = event.target.id;
