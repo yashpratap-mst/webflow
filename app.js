@@ -10,9 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Default route for testing server response
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "hello from server side" });
-});
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
