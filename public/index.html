@@ -1,36 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Text Example</title>
-    <style>
-        /* Basic styling for the div */
-        .custom-text-container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f0f0f0;
-            color: #333;
-            font-size: 2rem;
-            font-family: Arial, sans-serif;
-        }
-    </style>
-</head>
-<body>
+<!-- Embed this code in Webflow to install the plugin -->
+<script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.1.0/dist/index.js"></script>
+<style>
+  /* Style for the floating emoji picker */
+  #emoji-picker {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-    <div class="custom-text-container" id="customTextDiv">
-        <!-- The custom text will go here -->
-    </div>
+  .emoji-picker {
+    width: 300px;
+    height: auto;
+  }
 
-    <script>
-        // Insert custom text into the div
-        const customText = "Hello, Welcome!";
-        document.getElementById('customTextDiv').textContent = customText;
-    </script>
+  /* Visual cue for selected div */
+  .selected-div {
+    border: 2px dashed #ffcc00;
+    padding: 10px;
+  }
+</style>
 
-</body>
-</html>
+<!-- Emoji Picker Widget -->
+<div id="emoji-picker">
+  <emoji-picker></emoji-picker>
+</div>
+
+<script>
+  // Functionality for adding emoji to selected div
+  document.querySelector("emoji-picker").addEventListener("emoji-click", function(event) {
+    const emoji = event.detail.unicode;
+    const selectedDiv = document.querySelector('.selected-div');
+    
+    if (selectedDiv) {
+      selectedDiv.innerHTML += emoji; // Append emoji to selected div
+    } else {
+      alert('Please select a div first.');
+    }
+  });
+
+  // Functionality to select a div by clicking on it
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.matches('div')) {
+      // Toggle 'selected-div' class to indicate the div is selected
+      if (e.target.classList.contains('selected-div')) {
+        e.target.classList.remove('selected-div');
+      } else {
+        e.target.classList.add('selected-div');
+      }
+    }
+  });
+</script>
+
 
